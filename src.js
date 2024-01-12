@@ -10,6 +10,9 @@ const soundsSrc = [
     "38732__hollandm__steel-tongue-drum/mp3/692562__hollandm__bb3-steel-tongue-drum.mp3",
 ];
 
+const whiteThreshold = 10;
+const blackThreshold = 10;
+
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
@@ -38,6 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = ctx.getImageData(mouseX, mouseY, 1, 1).data;
         const {h, s, v} = rgb2hsv(data[0], data[1], data[2]);
         console.log({h, s, v});
+
+        if (s < whiteThreshold || v < blackThreshold) {
+            // Do not play on white or black area
+            return;
+        }
 
         let soundSrc = "";
         if (h > 320 || h <= 15) {
