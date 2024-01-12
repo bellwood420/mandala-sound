@@ -1,17 +1,63 @@
 const defaultImageSrc = "Geometric_triangles_mandala.png";
 
-const soundsSrc = [
-    "38732__hollandm__steel-tongue-drum/mp3/692569__hollandm__c3-steel-tongue-drum.mp3",
-    "38732__hollandm__steel-tongue-drum/mp3/692570__hollandm__d3-steel-tongue-drum.mp3",
-    "38732__hollandm__steel-tongue-drum/mp3/692571__hollandm__e3-steel-tongue-drum.mp3",
-    "38732__hollandm__steel-tongue-drum/mp3/692829__hollandm__f3-steel-tongue-drum.mp3",
-    "38732__hollandm__steel-tongue-drum/mp3/692568__hollandm__g3-steel-tongue-drum.mp3",
-    "38732__hollandm__steel-tongue-drum/mp3/692561__hollandm__a3-steel-tongue-drum.mp3",
-    "38732__hollandm__steel-tongue-drum/mp3/692562__hollandm__bb3-steel-tongue-drum.mp3",
-];
-
 const whiteThreshold = 10;
 const blackThreshold = 10;
+
+const audioContext = new AudioContext();
+class Sound  {
+    url = "";
+    buffer = null;
+
+    constructor(url) {
+        this.url = url;
+    }
+
+    load() {
+        return new Promise((resolve) => {
+            const request = new XMLHttpRequest();
+            request.open("GET", this.url, true);
+            request.responseType = "arraybuffer";
+
+            request.onload = () => {
+                audioContext.decodeAudioData(request.response, (buffer) => {
+                    this.buffer = buffer;
+                    resolve(buffer);
+                });
+            };
+
+            request.send();
+        });
+    }
+
+    play() {
+        if (!this.buffer) {
+            return;
+        }
+
+        const source = audioContext.createBufferSource();
+        source.buffer = this.buffer;
+        source.connect(audioContext.destination);
+        source.onended = () => {
+            source.stop(0);
+        };
+        source.start(0);
+
+    }
+}
+
+const sounds = [
+    new Sound("./38732__hollandm__steel-tongue-drum/mp3/692569__hollandm__c3-steel-tongue-drum.mp3"),
+    new Sound("./38732__hollandm__steel-tongue-drum/mp3/692570__hollandm__d3-steel-tongue-drum.mp3"),
+    new Sound("./38732__hollandm__steel-tongue-drum/mp3/692571__hollandm__e3-steel-tongue-drum.mp3"),
+    new Sound("./38732__hollandm__steel-tongue-drum/mp3/692829__hollandm__f3-steel-tongue-drum.mp3"),
+    new Sound("./38732__hollandm__steel-tongue-drum/mp3/692568__hollandm__g3-steel-tongue-drum.mp3"),
+    new Sound("./38732__hollandm__steel-tongue-drum/mp3/692561__hollandm__a3-steel-tongue-drum.mp3"),
+    new Sound("./38732__hollandm__steel-tongue-drum/mp3/692562__hollandm__bb3-steel-tongue-drum.mp3"),
+];
+
+for (const sound of sounds) {
+    sound.load();
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById("canvas");
@@ -47,38 +93,37 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        audioContext.resume();
+
         let soundSrc = "";
         if (h > 320 || h <= 15) {
             // 1st chakra
-            soundSrc = soundsSrc[0];
+            sounds[0].play();
         }
         else if (h > 15 && h <= 40) {
             // 2nd chakra
-            soundSrc = soundsSrc[1];
+            sounds[1].play();
         }
         else if (h > 40 && h <= 65) {
             // 3rd chakra
-            soundSrc = soundsSrc[2];
+            sounds[2].play();
         }
         else if (h > 65 && h <= 155) {
             // 4th chakra
-            soundSrc = soundsSrc[3];
+            sounds[3].play();
         }
         else if (h > 155 && h <= 200) {
             // 5th chakra
-            soundSrc = soundsSrc[4];
+            sounds[4].play();
         }
         else if (h > 200 && h <= 260) {
             // 6th chakra
-            soundSrc = soundsSrc[5];
+            sounds[5].play();
         }
         else if (h > 260 && h <= 320) {
             // 7th chakra
-            soundSrc = soundsSrc[6];
+            sounds[6].play();
         }
-
-        const audio = new Audio(soundSrc);
-        audio.play();
     };
 });
 
