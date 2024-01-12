@@ -1,13 +1,13 @@
 const defaultImageSrc = "Geometric_triangles_mandala.png";
 
 const soundsSrc = [
-    "38732__hollandm__steel-tongue-drum/692569__hollandm__c3-steel-tongue-drum.wav",
-    "38732__hollandm__steel-tongue-drum/692570__hollandm__d3-steel-tongue-drum.wav",
-    "38732__hollandm__steel-tongue-drum/692571__hollandm__e3-steel-tongue-drum.wav",
-    "38732__hollandm__steel-tongue-drum/692829__hollandm__f3-steel-tongue-drum.wav",
-    "38732__hollandm__steel-tongue-drum/692568__hollandm__g3-steel-tongue-drum.wav",
-    "38732__hollandm__steel-tongue-drum/692561__hollandm__a3-steel-tongue-drum.wav",
-    "38732__hollandm__steel-tongue-drum/692562__hollandm__bb3-steel-tongue-drum.wav",
+    "38732__hollandm__steel-tongue-drum/mp3/692569__hollandm__c3-steel-tongue-drum.mp3",
+    "38732__hollandm__steel-tongue-drum/mp3/692570__hollandm__d3-steel-tongue-drum.mp3",
+    "38732__hollandm__steel-tongue-drum/mp3/692571__hollandm__e3-steel-tongue-drum.mp3",
+    "38732__hollandm__steel-tongue-drum/mp3/692829__hollandm__f3-steel-tongue-drum.mp3",
+    "38732__hollandm__steel-tongue-drum/mp3/692568__hollandm__g3-steel-tongue-drum.mp3",
+    "38732__hollandm__steel-tongue-drum/mp3/692561__hollandm__a3-steel-tongue-drum.mp3",
+    "38732__hollandm__steel-tongue-drum/mp3/692562__hollandm__bb3-steel-tongue-drum.mp3",
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
